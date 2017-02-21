@@ -1,0 +1,12 @@
+{
+    "require": {
+        "doctrine/cache": "^1.6",
+        "pimple/pimple": "^3.0",
+        "monolog/monolog": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wqy\\WechatQy\\": "src"
+        }
+    }
+}

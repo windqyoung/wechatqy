@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * 数组字段都使用小写字母
+ * 有一部分字段不要使用, 见
+ * @see Wqy\WechatQy\DefaultServices
+ */
+return [
+    'corpid' => 'wxffced6cfda4e37ed310486',
+    'corpsecret' => 'YV3un_4Pp0FbcYEtuE3F1NQTanpdZOHUrjN2RbTKNkX-YJVehfl3hKMqXSMZZ-4-9CPJ9lqNV',
+    // 暂时无用.
+    'cachedir' => __DIR__ . '/storage/qycache',
+    'logfile' => __DIR__ . '/storage/qy.log',
+    // 微信跳转回来的url
+//     'redirectcallbackuri' => '/qy.php',
+    'debug' => true,
+];
