@@ -1,4 +1,5 @@
 {
+    "name": "wqy/wechatqy",
     "require": {
         "doctrine/cache": "^1.6",
         "pimple/pimple": "^3.0",
