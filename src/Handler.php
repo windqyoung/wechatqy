@@ -33,10 +33,7 @@ class Handler
         $this->setDi($di);
 
         // {{{
-        if (isset($di['debug'])
-                && $di['debug']
-                && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') === false
-                && ! isset($this->data['json'])) {
+        if ($this->isDebug() && ! $this->isJsonRequest()) {
             $di['logger']->pushHandler($h = new StreamHandler('php://output'));
             $h->setFormatter(new HtmlFormatter());
         }
@@ -49,6 +46,11 @@ class Handler
             $di['logger']->error('发生异常', ['data' => $this->data, 'e' => $e]);
             throw $e;
         }
+    }
+
+    protected function isDebug()
+    {
+        return isset($this->di['debug']) && $this->di['debug'];
     }
 
     protected function doHandle()
@@ -64,10 +66,11 @@ class Handler
             // 没state, 跳转到微信
             $url = $this->di['url']->loginpageUrlWithDefaultCallbackUri($sessionState);
 
-            $this->di['logger']->info('请求URL', [
-                'session_state' => $sessionState,
-                'url' => $url,
-            ]);
+            $this->di['logger']->info('请求URL', [ 'session_state' => $sessionState, 'url' => $url, ]);
+
+            if (isset($data['go'])) {
+                return $this->returnObject(null, ['Location' => $url]);
+            }
 
             if ($this->isJsonRequest()) {
                 return $this->returnObject(['url' => $url]);
